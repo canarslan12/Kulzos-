@@ -1,5 +1,5 @@
 jQuery(document).ready(function () {
-    console.log("readys");
+    console.log("ready");
     $("#content").on("keypress", 'textarea', (function (e) {
         console.log("pressed")
         if (e.ctrlKey && (e.keyCode == 10 || e.keyCode == 13)) {
@@ -9,26 +9,15 @@ jQuery(document).ready(function () {
             console.log("done")
         }
     }));
-    /*
-        var origAppend = $.fn.append;
-
-        $.fn.append = function () {
-            return origAppend.apply(this, arguments).trigger("append");
-        };
-
-        */
-    triggered = false;
-    counter = 0;
+    var triggered = false;
+    var counter = 0;
     $('.entrylist').on("DOMSubtreeModified", function () {
         console.log('changed');
         if (!triggered) {
             counter++;
-            //if((counter%2)==0)
-            //{
             console.log("triggered")
             triggered = true;
             $('.entrylist').trigger("append")
-            //}
         }
     });
 
@@ -53,10 +42,8 @@ jQuery(document).ready(function () {
             var yazar = ($(this).attr("yazar"));
             var ses = "";
             ses = "";
-
             $(this).children(".yorumalt2").html(yorumalt(id, yazar, yazar, ""));
         });
         triggered = false;
     });
-
 })
