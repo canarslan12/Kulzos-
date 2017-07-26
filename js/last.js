@@ -1,29 +1,34 @@
+var triggered = false;
+var counter = 0;
 jQuery(document).ready(function () {
     console.log("ready");
     $("#content").on("keypress", 'textarea', (function (e) {
-        console.log("pressed")
         if (e.ctrlKey && (e.keyCode == 10 || e.keyCode == 13)) {
-            console.log("presseds")
-            console.log($(".btn:contains('gönder')").eq(0));
             $(".btn:contains('gönder')")[0].click()
-            console.log("done")
         }
     }));
-    var triggered = false;
-    var counter = 0;
-    $('.entrylist').on("DOMSubtreeModified", function () {
-        console.log('changed');
+    $("#content").on("DOMSubtreeModified", ".entrylist", function () {
+        //console.log('changed');
         if (!triggered) {
             counter++;
-            console.log("triggered")
+            //console.log("triggered")
             triggered = true;
             $('.entrylist').trigger("append")
         }
     });
+    $("#content").on("DOMSubtreeModified", ".yorumlist", function () {
+        //console.log('changed');
+        if (!triggered) {
+            counter++;
+            //console.log("triggered")
+            triggered = true;
+            $('.yorumlist').trigger("append")
+        }
+    });
 
     // mesaj,yorum gönderilince silme vb. gelmesi
-    $(".entrylist").bind("append", function () {
-        console.log("test");
+    $("#content").on("append", ".entrylist", function () {
+        //console.log("test");
         $('.entrylist > li').last().each(function (i) {
             var id = ($(this).attr("id")).substr(5);
             var yazar = ($(this).attr("yazar"));
@@ -35,8 +40,9 @@ jQuery(document).ready(function () {
         });
         triggered = false;
     });
-    $(".yorumlist").bind("append", function () {
-        console.log("test");
+    $("#content").on("append", ".yorumlist", function () {
+        //TODO yorum listte silme çalışmıyor
+        //console.log("test");
         $('.yorumlist > li').last().each(function (i) {
             var id = ($(this).attr("id")).substr(5);
             var yazar = ($(this).attr("yazar"));
