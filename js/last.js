@@ -4,6 +4,7 @@ jQuery(document).ready(function () {
     console.log("ready");
     $("#content").on("keypress", 'textarea', (function (e) {
         if (e.ctrlKey && (e.keyCode == 10 || e.keyCode == 13)) {
+            $(".btn:contains('kaydet')")[0].click()
             $(".btn:contains('gönder')")[0].click()
         }
     }));
