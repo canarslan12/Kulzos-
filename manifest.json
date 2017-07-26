@@ -23,5 +23,5 @@
    "manifest_version": 2,
    "name": "Kulzos++",
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "0.0.5"
+   "version": "0.0.6"
 }
