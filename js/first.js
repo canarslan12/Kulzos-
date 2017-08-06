@@ -6,7 +6,7 @@ if (!localStorage["fontSize"]) {
 }
 var settingsListText = [
     ["fontSize", "yazı boyutu ne olsun (site için varsayılan 14)", 15],
-    ["read", "okunan yorumlar koyu gözüksün (ms cinsinden - 600 önerilir)", 0]//<a href='/' title='açıklama'>*</a>
+    ["read", "okunan yorumlar koyu gözüksün (ms cinsinden - 600 önerilir)<a href='/entry/52348/' title='açıklama'>*</a>", 0]
 ];
 var settingsListCheck = [
     ["baslikEngel", "başlık engelleme tuşu gözüksün", 1],
@@ -36,6 +36,9 @@ if (localStorage["baslikEngel"] === "1") {
     css.innerHTML += ".baslikbilgi{top: -17px!important}";
     css.innerHTML += ".left{z-index:10;user-select: none}";
 }
+css.innerHTML += ".logo_1{cursor:pointer;position: absolute;color: white;margin-top: -3px;margin-left: 90px;font-size: 37px;font-weight: 800}" +
+    ".logo_2{cursor:pointer;color: white!important;;margin-top: -56px;margin-left: 18px;font-size: 50%;font-weight: 800;text-decoration: none!important;}" +
+    ".logo_1:hover, .logo_1:focus {color: white!important;text-decoration: none!important;}";
 
 /*
 function notifyMe(header, body, link) {

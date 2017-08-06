@@ -4,6 +4,9 @@ var draging = null;
 var cop = 0;
 jQuery(document).ready(function () {
     console.log("ready");
+    /** Logo ++ addition */
+    $('.top1').prepend('<a class=logo_1 href="/27508/kulzos/" data="kulzos++" title="kulzos++" bid="27508">+<div class=logo_2>+</div></a>')
+
     /** Automatic login */
     /*if ($("#userbar .btn[value=giriş]")) {
         $(".dropdown-menu").eq(1).css("display", "block")
@@ -73,17 +76,27 @@ jQuery(document).ready(function () {
             cop = 1;
             triggered = true;
             var addition = "";
+
+
             for (var key in localStorage) {
-                if (key[0] === "|" && key[1] === "b")
-                    addition += '<li><a href="#">' + key.slice(7) + '</a></li>'
+                if (key[0] === "|" && key[1] === "b") {
+                    var title = key.slice(7);
+                    var href = hrefMaker(title, localStorage[key]);
+                    addition += '<li><a href="' + href + '" data="' + title + '" bid="' + localStorage[key] + '">' + title + '</a></li>'
+                }
             }
             $(".basliklar").html(addition);
             triggered = false;
         });
 
+        function hrefMaker(title, id) {
+            return "/" + id + "/" + title.replace(" ", "-") + "/"
+        }
+
         function blockTitle(title) {
-            localStorage["|block_" + title] = 1;
-            $(".basliklar a[data='" + title + "']").parent().remove();
+            var that = $(".basliklar a[data='" + title + "']")
+            localStorage["|block_" + title] = that.attr("bid");
+            that.parent().remove();
         }
 
         function unBlockTitle(title) {
@@ -95,7 +108,7 @@ jQuery(document).ready(function () {
 
         function removeBlockedTitles() {
             $(".basliklar a").each(function () {
-                if (localStorage["|block_" + $(this).attr('data')] === "1")
+                if (localStorage["|block_" + $(this).attr('data')])
                     $(this).parent().remove();
             });
             triggered = false;
